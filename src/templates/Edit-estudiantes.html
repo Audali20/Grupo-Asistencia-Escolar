@@ -1,0 +1,103 @@
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .logo{
+        width: 200px;
+    }
+
+    body {
+        background: #00a7a7;
+        font-family: Arial, Helvetica, sans-serif;
+        animation-name: CambiaColor;
+        animation-duration: 20s;
+
+    }
+
+    @keyframes CambiaColor{
+        from{
+            background: #000000;
+        }
+
+        25%{
+            background: blueviolet;
+        }
+
+        50%{
+            background: #000000;
+        }
+
+        75%{
+            background: blueviolet;
+        }
+        
+        100%{
+            background: #0AABB0;
+        }
+    }
+
+    #formulario {
+        width: 360px;
+        height: 480px;
+        box-shadow: 0px 0px 20px #ffffff;
+        border: 1px solid #ffffff;
+        margin: 0px auto;
+        text-align: center;
+        
+    }
+
+    p {
+        color: rgb(255, 255, 255);
+        text-decoration: solid;
+    }
+
+    .input {
+        color: white;
+        background: rgba(255, 255, 255, 0);
+        border: 0px;
+        border-bottom: 2px solid rgb(255, 255, 255);
+        border-radius: 5px;
+        outline: 0px;
+        margin: 15px;
+    }
+
+    .botones {
+        background: rgba(0, 0, 0, 0);
+        color: rgba(255, 255, 255, 0.863);
+        border: 0px;
+        border-bottom: 2px solid #ffffff;
+        border-top: 1px solid #ffffff;
+        border-radius: 10px;
+        width: 170px;
+        height: 30px;
+        margin: 10px;
+    }
+
+    .pf {
+        color: white;
+        font-size: small;
+    }
+
+</style>
+
+<img class = "logo" src="../static/logo.png" alt="logo">
+
+<form id = "formulario" action = "/update/{{ estudiante.0 }}" method = "POST">
+
+    <p>
+    NIE <br> <input class = "input" type="number" name = "NIE" placeholder = "NIE" value = "{{ estudiante.0 }}" required><p>
+    Nombre <br> <input class = "input" type="text" name = "Nombre" placeholder = "Nombre" value = "{{ estudiante.1 }}" required><p>
+    Apellido <br> <input class = "input" type="text" name = "Apellido" placeholder = "Apellido" value = "{{ estudiante.2 }}" required><p>
+    Correo <br> <input class = "input" type="text" name = "Correo" placeholder = "Correo" value = "{{ estudiante.3 }}"><p>
+    Id_docente <br> <input class = "input" type="number" name = "Id_docente" placeholder = "Id_docente" value = "{{ estudiante.4 }}"><p>
+
+    <br><input class = "botones" type="submit" value = "Registrar estudiante">
+    <br><input class = "botones" type="reset" value = "Vaciar formulario">
+    
+    <div class = "pf">
+    <i> Proyecto Final &copy; 2022 </i>
+    </div>
+
+</form>

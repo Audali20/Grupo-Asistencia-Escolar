@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Estudiantes</title>
+    <link rel="icon" type="image/x-icon" href="../static/lg.png">
+</head>
+<body>
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .img {
+            float: right;
+        }
+
+        .logo{
+            width: 200px;
+        }
+
+        body {
+            background: #00a7a7;
+            font-family: Arial, Helvetica, sans-serif;
+            
+
+        }
+
+        .Form-left{
+            float: left;
+            background: #000000;
+            width: 25%;
+            height: 640px;
+        }
+
+        #formulario {
+            margin: 0px auto;
+            text-align: center;
+            border-top: 5px solid white;
+        }
+
+        p {
+            color: rgb(255, 255, 255);
+            text-decoration: solid;
+        }
+
+        .input {
+            color: white;
+            background: rgba(255, 255, 255, 0);
+            border: 0px;
+            border-bottom: 2px solid rgb(255, 255, 255);
+            border-radius: 5px;
+            outline: 0px;
+            margin: 20px;
+        }
+
+        .botones {
+            background: rgba(0, 0, 0, 0);
+            color: rgba(255, 255, 255, 0.863);
+            border: 0px;
+            border-bottom: 2px solid #ffffff;
+            border-top: 1px solid #ffffff;
+            border-radius: 10px;
+            width: 170px;
+            height: 30px;
+            margin: 10px;
+        }
+
+        .boton-update {
+            background: green;
+            color: white;
+            
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .boton-delete {
+            background: red;
+            color: white;
+            
+            text-decoration: none;
+            font-size: 12px;
+
+        }
+
+        .pf {
+            color: white;
+            font-size: small;
+        }
+
+        /* .tabla{
+            background: #000000;
+            
+            color: white;
+            float: left; 
+            padding: 5px;
+            border-top: 5px solid white;
+            width: 760px;
+        } */
+
+        table {
+            margin: 0px auto;
+            font-size: 14px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #383838;
+            color: #ffffff;
+        }
+
+        tbody {
+            background: black;
+            color: white;
+        }
+
+        th {
+            
+            padding: 20px 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid  #363636;
+        }
+
+        .titulo {
+            color: black;
+            font-size: 20px;
+            font-family: monospace;
+        }
+
+        .titulo-estudiante {
+            color: white;
+            font-size: 20px;
+            font-family: monospace;
+        }
+
+        #fecha-date {
+            background: #ffffff;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            border: 0px;
+            border-radius: 10px;
+            border-bottom: 4px solid #000000;
+            border-top: 2px solid #000000;
+            text-align: center;
+            font-size: 20px;  
+            width: 200px;
+        }
+
+    </style>
+    <div class = "Form-left">
+        <form id = "formulario" action = "/Add_estudiante" method = "POST">
+
+            <b><center><p class = "titulo-estudiante">Añadir estudiante</p></center></b>
+
+            <p>
+            <br> <input class = "input" type="number" name = "NIE" placeholder = "NIE" required><p>
+            <br> <input class = "input" type="text" name = "Nombre" placeholder = "Nombre" required><p>
+            <br> <input class = "input" type="text" name = "Apellido" placeholder = "Apellido" required><p>
+            <br> <input class = "input" type="text" name = "Correo" placeholder = "Correo" required><p>
+            <br> <input class = "input" type="number" name = "Id_docente" placeholder = "Id_docente" required><p>
+
+            <br><input class = "botones" type="submit" value = "Registrar estudiante">
+            <br><input class = "botones" type="reset" value = "Vaciar formulario">
+
+            <div>
+                <button class = "botones" id="pdfout">Crear PDF</button>
+            </div>
+            
+            <div class = "pf">
+            <i> Proyecto Final &copy; 2022 </i>
+            </div>
+
+        </form>
+    </div>
+    <div class="tabla" id = "tabla">
+        <b><center><p class = "titulo">Lista de Asistencia</p></center></b>
+        <br>
+        <b><center><input type="date" name="fecha" id="fecha-date"></center></b>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <td>NIE</td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Correo</td>
+                    <td>Id_docente</td>
+                    <td>Operations</td>
+                    <td>Asistio</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for estudiante in estudiantes %}
+                    <tr>
+                        <td>{{ estudiante.0 }}</td>
+                        <td>{{ estudiante.1 }}</td>
+                        <td>{{ estudiante.2 }}</td>
+                        <td>{{ estudiante.3 }}</td>
+                        <td>{{ estudiante.4 }}</td>
+                        <td>
+                            <a class = "boton-update" href="/edit/{{ estudiante.0 }}">Editar</a>
+                            <a class = "boton-delete" href="/delete/{{ estudiante.0 }}">Eliminar</a>
+                        </td>
+                        <td>
+                            <br> <input type="checkbox" name="Si" id="radio-si">Si
+                            <br> <input type="checkbox" name="No" id="radio-no">No
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="img">
+        <img class = "logo" src="../static/logo.png" alt="logo">
+    </div>
+
+    <!-- Scrips de JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha512-cLuyDTDg9CSseBSFWNd4wkEaZ0TBEpclX0zD3D6HjI19pO39M58AgJ1SjHp6c7ZOp0/OCRcC2BCvvySU9KJaGw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js" integrity="sha512-sk0cNQsixYVuaLJRG0a/KRJo9KBkwTDqr+/V94YrifZ6qi8+OO3iJEoHi0LvcTVv1HaBbbIvpx+MCjOuLVnwKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var maintable = document.getElementById
+        ("tabla"),
+            pdfout = document.getElementById
+            ("pdfout");
+        pdfout.onclick = function(){
+            var doc = new jsPDF("p", "pt", "letter");
+            var margin = 30;
+            var scale = (doc.internal.pageSize.width - margin * 1) / document.body.clientWidth;
+            var scale_mobile = (doc.internal.pageSize.width - margin * 1) / document.body.getBoundingClientRect();
+
+            //checking
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+                // mobile
+                doc.html(maintable,{
+                    x: margin,
+                    y: margin,
+                    html2canvas:{
+                        scale: scale_mobile,
+                    },
+                    callback: function(doc){
+                        doc.output("dataurlnewwindow",
+                        {filename: "pdf.pdf"});
+                    }
+                })
+            } else{
+                // PC
+                doc.html(maintable,{
+                    x: margin,
+                    y: margin,
+                    html2canvas:{
+                        scale: scale,
+                    },
+                    callback: function(doc){
+                        doc.output("dataurlnewwindow",
+                        {filename: "pdf.pdf"});
+                    }
+                })
+            }
+        };
+    </script>
+</body>
+</html>

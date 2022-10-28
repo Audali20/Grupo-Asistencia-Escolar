@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Estudiantes</title>
+    <link rel="icon" type="image/x-icon" href="../static/lg.png">
+</head>
+<body>
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .img {
+            float: right;
+        }
+
+        .logo{
+            width: 200px;
+        }
+
+        body {
+            background: #00a7a7;
+            font-family: Arial, Helvetica, sans-serif;
+            
+
+        }
+
+        .Form-left{
+            float: left;
+            background: #000000;
+            width: 25%;
+            height: 610px;
+        }
+
+        #formulario {
+            margin: 0px auto;
+            text-align: center;
+            border-top: 5px solid white;
+        }
+
+        p {
+            color: rgb(255, 255, 255);
+            text-decoration: solid;
+        }
+
+        .input {
+            color: white;
+            background: rgba(255, 255, 255, 0);
+            border: 0px;
+            border-bottom: 2px solid rgb(255, 255, 255);
+            border-radius: 5px;
+            outline: 0px;
+            margin: 20px;
+        }
+
+        .botones {
+            background: rgba(0, 0, 0, 0);
+            color: rgba(255, 255, 255, 0.863);
+            border: 0px;
+            border-bottom: 2px solid #ffffff;
+            border-top: 1px solid #ffffff;
+            border-radius: 10px;
+            width: 170px;
+            height: 30px;
+            margin: 10px;
+        }
+
+        .boton-update {
+            background: green;
+            color: white;
+            
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .boton-delete {
+            background: red;
+            color: white;
+            
+            text-decoration: none;
+            font-size: 12px;
+
+        }
+
+        .pf {
+            color: white;
+            font-size: small;
+        }
+
+        .tabla{
+            background: #000000;
+            
+            color: white;
+            float: left; 
+            padding: 5px;
+            border-top: 5px solid white;
+            width: 50%;
+        }
+
+        table {
+            
+            font-size: 14px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #363636;
+        }
+
+        th {
+            padding: 20px 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid  #363636;
+        }
+
+        .titulo {
+            font-size: 20px;
+            font-family: monospace;
+        }
+
+    </style>
+    <div class = "Form-left">
+        <form id = "formulario" action = "/Add_asistencia/{{ asistencia.0 }}" method = "POST">
+
+            <p>
+            <br> <input class = "input" type="number" name = "NIE" placeholder = "NIE" value = "{{ asistencia.0 }}" required><p>
+            <br> <input class = "input" type="text" name = "Nombre" placeholder = "Nombre" value = "{{ asistencia.1 }}" required><p>
+            <br> <input class = "input" type="text" name = "Apellido" placeholder = "Apellido" value = "{{ asistencia.2 }}" required><p>
+
+            <br><input class = "botones" type="submit" value = "Registrar estudiante">
+            <br><input class = "botones" type="reset" value = "Vaciar formulario">
+            
+            <div class = "pf">
+            <i> Proyecto Final &copy; 2022 </i>
+            </div>
+
+        </form>
+    </div>
+    <div class="tabla">
+        <table>
+            <thead>
+                <b><center><p class = "titulo">Lista de Estudiantes</p></center></b>
+                <tr>
+                    <td>NIE</td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Operations</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asistencia in asistencias %}
+                    <tr>
+                        <td>{{ asistencia.0 }}</td>
+                        <td>{{ asistencia.1 }}</td>
+                        <td>{{ asistencia.2 }}</td>
+                        <td>
+                            <a class = "boton-update" href="/edit/{{ estudiante.0 }}">Editar</a>
+                            <a class = "boton-delete" href="/delete/{{ estudiante.0 }}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <div class = "pf">
+                <i> Proyecto Final &copy; 2022 </i>
+            </div>
+        </table>
+    </div>
+    <div class="img">
+        <img class = "logo" src="../static/logo.png" alt="logo">
+    </div>
+</body>
+</html>

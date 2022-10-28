@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencia Escolar</title>
+    <link rel="icon" type="image/x-icon" href="../static/lg.png">
+    <!-- <link rel="stylesheet" href="../css/interfaz1.css"> -->
+</head>
+<body>
+
+    <style>
+        body{
+            background-color: #00a7a7;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+        
+
+        }
+        #logo{
+            width: 500px;
+            background-repeat: none;
+        }
+        .navbar {
+            text-align: center;
+            width: 1320px;
+            overflow: hidden;
+            padding: 15px;
+            background-color:rgba(2, 59, 50, 0.932);;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border-radius: 90px;
+        }
+        /* Esta parte ya lleva al interior del menu, osea las opciones, se encontraran a la izquierda del menu negro, la letra llevara un tamaño de 18px y de un color blanco, estara centrado con un padding correspondiente, no habra decoracion de texto y su boton tendra un borde para que se vea redondeado */
+        /* Links inside the navbar */
+        .navbar a {
+            font-size: 18px;
+            color: white;
+            text-align: center;
+            padding: 20px 16px;
+            border-radius: 24px;
+            text-decoration: none;
+        }
+        /* Estas es para los otros botones del menu */
+        /* The dropdown container */
+        .dropdown {
+            justify-content: center;
+        }
+
+    </style>
+
+    <center><img src="../static/logo.png" id="logo"></center>
+    <div class="navbar">
+
+        <a href= {{ url_for("Create_asistencia") }}>Toma de Asistencia</a>
+        
+        <div class="dropdown">
+    </div>
+    
+</body>
+</html>
